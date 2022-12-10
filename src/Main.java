@@ -1,9 +1,8 @@
-import javax.management.MalformedObjectNameException;
-import java.util.Scanner;
+
 
 
 public class Main {
-    public static void main(String[] args) throws MalformedObjectNameException {
+    public static void main(String[] args)  {
 
         Scanner scan = new Scanner(System.in);
 
@@ -13,6 +12,10 @@ public class Main {
         System.out.println(veiculo);
 
         //Teste Aline
+//        Testanto
+
+
+
 
 
 //        Cliente cliente = new Cliente("Ricardo", "dgdfg453");
