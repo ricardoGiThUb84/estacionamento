@@ -1,34 +1,45 @@
+import exceptions.NaoExisteRegistroException;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Scanner;
 
+import static java.lang.System.out;
+
 public class Main {
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws NaoExisteRegistroException {
 
         Scanner scan = new Scanner(System.in);
 
+        int sair = -1;
 
-        Veiculo veiculo = TelaCadastro.cadastraVeiculo(scan);
+        while(sair != 3){
+            out.println("==============================");
+            out.println("Bem vindo ao estacione seguro:");
+            out.println("==============================");
 
-        System.out.println(veiculo);
+            out.println("Digite: 1 - Entrada Veículo | 2 - Saída Veículo | 3 - Sair");
 
-        //Teste Aline
-//        Testanto
+            switch(scan.nextInt()){
+                case 1:
+                    TelaSistema.entrada(scan);
+                    break;
+                case 2:
+                    out.println("implementar");
+                    break;
+                case 3:
+                    sair = 3;
+                    break;
+                default:
+                    out.println("Entrada inválida");
+            }
 
-        //Cliente cliente = new Cliente("Ricardo", "dgdfg453");
-//
-//        Veiculo carro = new Veiculo("fiat", "jkl-1212");
-//
-//        carro.setCondutor(cliente);
-//
-//        Registro registro = new Registro(carro, "5 12 2022 10 22");
-//
-//        Repositorio repositorio = Repositorio.getInstance();
-//
-//        repositorio.adiciona(registro);
-//
-//        repositorio.listaRegistrosComDataHoraSaidaParcial("5 12 2022 16 52");
+            out.println("Fim do Programa");
+        }
 
 
 
+        Repositorio.getInstance().listaRegistrosComDataHoraSaidaParcial("12-12-2012-16-25");
 
     }
 

@@ -9,7 +9,7 @@ public class ManipulaDatas {
 
     static public LocalDateTime formatarStringDataEntradaUsuario(String dataHora){
 
-        int[] data = Arrays.stream(dataHora.split(" ")).mapToInt(Integer::parseInt).toArray();
+        int[] data = Arrays.stream(dataHora.split("-")).mapToInt(Integer::parseInt).toArray();
 
         return LocalDateTime.of(data[2], data[1], data[0], data[3], data[4]);
     }

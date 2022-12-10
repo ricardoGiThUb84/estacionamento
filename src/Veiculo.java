@@ -1,7 +1,7 @@
 public class Veiculo {
 
-    private String modelo;
-    private String placa;
+    private final String modelo;
+    private final String placa;
 
     private Cliente condutor;
 
@@ -11,10 +11,12 @@ public class Veiculo {
     }
 
     public String getModelo() {
+
         return modelo;
     }
 
     public String getPlaca() {
+
         return placa;
     }
 
@@ -24,6 +26,7 @@ public class Veiculo {
     }
 
     public void setCondutor(Cliente condutor) {
+
         this.condutor = condutor;
     }
 
