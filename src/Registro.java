@@ -7,7 +7,7 @@ public class Registro implements CalculoValores {
     private String id;
     private Veiculo veiculo;
     private double valor;
-    private final String horaEntrada;
+    private String horaEntrada;
     private String horaSaida;
     private String dataHoraParcial;
 
@@ -16,9 +16,12 @@ public class Registro implements CalculoValores {
         this.id = veiculo.getPlaca();
         this.horaEntrada = dataEntrada;
     }
-
     public Veiculo getVeiculo() {
         return new Veiculo(veiculo.getModelo(), veiculo.getPlaca());
+    }
+
+    public void setHoraEntrada(String horaEntrada) {
+        this.horaEntrada = horaEntrada;
     }
 
     public void setHoraSaida(String horaSaida) {

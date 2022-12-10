@@ -1,16 +1,20 @@
 import Utilitarios.ManipulaDatas;
+import exceptions.NaoExisteRegistroException;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.lang.System.*;
 
 public class Repositorio {
-    static private Repositorio instance;
+    private static Repositorio instance;
 
-     private List<Registro> listaRegistro = new ArrayList<>();
+     private final List<Registro> listaRegistro = new ArrayList<>();
 
     
     private Repositorio() {}
 
-    static public Repositorio getInstance() {
+    public static Repositorio getInstance() {
         if(Objects.isNull(instance)) instance = new Repositorio();
       return instance;
     }
@@ -20,11 +24,19 @@ public class Repositorio {
         listaRegistro.add(registro);
     }
 
-    public boolean buscaRegistroPorId(String placa){
+    public Registro buscaRegistroPorId(String placa) throws NaoExisteRegistroException {
 
-    return listaRegistro.stream()
-            .anyMatch(registro -> registro.getId().equalsIgnoreCase(placa));
+        if(verificaSeHaRegistro(placa)){
+            return listaRegistro.stream()
+                    .filter(buscaRegistro -> buscaRegistro.getId()
+                            .equalsIgnoreCase(placa)).toList().get(0);
+        }
+        throw new NaoExisteRegistroException("Não há registro!");
+    }
 
+    public boolean verificaSeHaRegistro(String placa) {
+        return listaRegistro.stream()
+                .anyMatch(registro -> registro.getId().equalsIgnoreCase(placa));
     }
 
     public void listaRegistrosComDataHoraSaidaParcial(String dataHoraParcial){
@@ -33,7 +45,7 @@ public class Repositorio {
 
            registro.setDataHoraParcial(ManipulaDatas.calculaTempoParcial(registro.getHoraEntrada(), dataHoraParcial));
            registro.calculaValorMinuto(registro.getHoraEntrada() , dataHoraParcial);
-            System.out.println(registro);
+            out.println(registro);
 
         });
     }
@@ -44,7 +56,7 @@ public class Repositorio {
 
             registro.setDataHoraParcial(ManipulaDatas.calculaTempoParcial(registro.getHoraEntrada(), dataHoraParcial));
             registro.calculaValorMinuto(registro.getHoraEntrada() , dataHoraParcial);
-            System.out.println(registro);
+            out.println(registro);
 
         });
     }

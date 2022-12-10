@@ -1,47 +1,48 @@
 import java.util.Scanner;
 
+import static java.lang.System.out;
+
 public class TelaCadastro {
-    Veiculo veiculo;
-    Cliente cliente;
+
+    private TelaCadastro(){};
     public static Veiculo cadastraVeiculo(Scanner scan){
 
         String modelo;
         String placa;
 
+        out.println("Cadastre o veículo");
+        out.println("------------------");
 
-        System.out.println("Cadastre o veículo");
-        System.out.println("------------------");
-
-        System.out.println("Digite 0 modelo:");
+        out.println("Digite o modelo:");
 
         modelo = scan.next();
 
-        System.out.println("Digite a placa:");
+        out.println("Digite a placa:");
 
         placa = scan.next();
 
         return new Veiculo(modelo, placa);
-
-
     }
     public static Cliente cadastraCliente(Scanner scan){
         String nome;
         String cnh;
 
-        System.out.println("Cadastre o cliente");
-        System.out.println("------------------");
+        out.println("Cadastre o cliente");
+        out.println("------------------");
 
-        System.out.println("Digite 0 nome:");
+        out.println("Digite 0 nome:");
 
         nome = scan.next();
 
-        System.out.println("Digite a cnh:");
+        out.println("Digite a cnh:");
 
         cnh = scan.next();
 
         return new Cliente(nome, cnh);
+    }
 
-
+    public static Registro cadasTrarRegistro(Veiculo veiculo, String dataEntrada){
+        return new Registro(veiculo , dataEntrada);
     }
 
 }
