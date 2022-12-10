@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Tela {
+public class TelaCadastro {
     Veiculo veiculo;
     Cliente cliente;
     public static Veiculo cadastraVeiculo(Scanner scan){

@@ -37,6 +37,9 @@ public class Registro implements CalculoValores {
         return horaSaida;
     }
 
+    public String getId() {
+        return id;
+    }
 
     @Override
     public void calculaValorMinuto(String dataHoraInicio, String dataHoraFim) {

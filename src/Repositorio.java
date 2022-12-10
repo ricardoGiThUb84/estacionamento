@@ -20,6 +20,13 @@ public class Repositorio {
         listaRegistro.add(registro);
     }
 
+    public boolean buscaRegistroPorId(String placa){
+
+    return listaRegistro.stream()
+            .anyMatch(registro -> registro.getId().equalsIgnoreCase(placa));
+
+    }
+
     public void listaRegistrosComDataHoraSaidaParcial(String dataHoraParcial){
 
         listaRegistro.forEach(registro -> {
