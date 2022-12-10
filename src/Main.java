@@ -1,5 +1,4 @@
-
-
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args)  {
@@ -7,18 +6,14 @@ public class Main {
         Scanner scan = new Scanner(System.in);
 
 
-        Veiculo veiculo = Tela.cadastraVeiculo(scan);
+        Veiculo veiculo = TelaCadastro.cadastraVeiculo(scan);
 
         System.out.println(veiculo);
 
         //Teste Aline
 //        Testanto
 
-
-
-
-
-//        Cliente cliente = new Cliente("Ricardo", "dgdfg453");
+        //Cliente cliente = new Cliente("Ricardo", "dgdfg453");
 //
 //        Veiculo carro = new Veiculo("fiat", "jkl-1212");
 //
