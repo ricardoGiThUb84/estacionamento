@@ -8,14 +8,10 @@ public class TelaSistema {
 
     public static void entrada(Scanner scan){
 
+        System.out.println("Digite a placa:");
 
 
-        do{
 
-            System.out.println("Digite a placa:");
-
-
-        }while(true);
 
 
     }
