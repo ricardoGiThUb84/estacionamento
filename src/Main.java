@@ -41,11 +41,6 @@ public class Main {
 
         Repositorio.getInstance().listaRegistrosComDataHoraSaidaParcial("12-12-2012-16-25");
 
-
-
-
-
-
     }
 
 }
