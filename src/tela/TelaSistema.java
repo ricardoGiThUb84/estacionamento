@@ -1,4 +1,11 @@
+package tela;
+
+import BancoDeDados.Repositorio;
+import entidade.Cliente;
+import entidade.Registro;
+import entidade.Veiculo;
 import exceptions.NaoExisteRegistroException;
+import tela.TelaCadastro;
 
 import java.util.Scanner;
 

@@ -1,8 +1,10 @@
+package BancoDeDados;
+
 import Utilitarios.ManipulaDatas;
+import entidade.Registro;
 import exceptions.NaoExisteRegistroException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.lang.System.*;
 
@@ -29,7 +31,7 @@ public class Repositorio {
         if(verificaSeHaRegistro(placa)){
             return listaRegistro.stream()
                     .filter(buscaRegistro -> buscaRegistro.getId()
-                            .equalsIgnoreCase(placa)).toList().get(0);
+                            .equalsIgnoreCase(placa)).findFirst().orElseThrow(() -> new NaoExisteRegistroException("Não há registro!"));
         }
         throw new NaoExisteRegistroException("Não há registro!");
     }

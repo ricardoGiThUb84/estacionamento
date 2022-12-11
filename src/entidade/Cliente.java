@@ -1,3 +1,5 @@
+package entidade;
+
 public class Cliente {
 
     private String nome, cnh;
@@ -17,7 +19,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" +
+        return "entidade.Cliente{" +
                 "nome:'" + nome + '\'' +
                 ", cnh:'" + cnh + '\'' +
                 '}';

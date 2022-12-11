@@ -1,3 +1,5 @@
+package entidade;
+
 public class Veiculo {
 
     private final String modelo;

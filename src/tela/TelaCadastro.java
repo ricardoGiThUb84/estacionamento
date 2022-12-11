@@ -1,3 +1,9 @@
+package tela;
+
+import entidade.Cliente;
+import entidade.Registro;
+import entidade.Veiculo;
+
 import java.util.Scanner;
 
 import static java.lang.System.out;
