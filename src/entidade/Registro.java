@@ -1,3 +1,5 @@
+package entidade;
+
 import Utilitarios.CalculoValores;
 import Utilitarios.ManipulaDatas;
 
@@ -67,7 +69,7 @@ public class Registro implements CalculoValores {
 
     @Override
     public String toString() {
-        return "Registro{" +
+        return "entidade.Registro{" +
                 "id='" + id + '\'' +
                 ", veiculo=" + veiculo +
                 ", valor=" + valor +

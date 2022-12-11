@@ -1,8 +1,8 @@
 package BancoDeDados;
-import Cliente;
-import Veiculo;
-import Registro;
-
+import entidade.Cliente;
+import entidade.Registro;
+import entidade.Veiculo;
+import java.util.ArrayList;
 import java.util.Objects;
 
 
