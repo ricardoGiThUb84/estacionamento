@@ -6,10 +6,8 @@ import entidade.Registro;
 import entidade.TipoRegistro;
 import entidade.Veiculo;
 import exceptions.NaoExisteRegistroException;
-
 import java.time.LocalDateTime;
 import java.util.*;
-
 import static java.lang.System.*;
 
 public class Repositorio {
@@ -27,8 +25,7 @@ public class Repositorio {
       return instance;
     }
 
-    public void adiciona(Registro registro) {
-
+    public void  adicionarRegistro(Registro registro) {
         listaRegistro.add(registro);
     }
 
@@ -57,26 +54,26 @@ public class Repositorio {
 
         LocalDateTime dataHoraMomentanea = ManipulaDatas.formatarStringDataEntradaUsuario(dataHoraParcial);
 
+        ArrayList<Registro> entradas = new ArrayList<>();
+        ArrayList<Registro> saidas = new ArrayList<>();
+
         listaRegistro.forEach(registro -> {
             if(registro.getTipoRegistro().equals(TipoRegistro.ENTRADA)){
-                String duracao = ManipulaDatas.calculaTempoParcial(registro.getDataRegistro(), dataHoraMomentanea);
+                entradas.add(registro);
+            }else{
+                saidas.add(registro);
+            }
+        });
+
+        entradas.forEach(entrada -> {
+            Optional<Registro> registro = saidas.stream().filter(saida -> saida.getVeiculo().getPlaca().equals(entrada.getVeiculo().getPlaca())).findFirst();
+            if(registro.isEmpty()){
+                String duracao = ManipulaDatas.calculaTempoParcial(entrada.getDataRegistro(), dataHoraMomentanea);
                 //var valorParcial = registro.calculaValorMinuto(registro.getVeiculo(), dataHoraMomentanea);
-                out.println(registro + " duração = " + duracao);
+                out.println(entrada + " duração = " + duracao);
             }
         });
     }
-
-//    public void listaRegistroComDataHoraSaida(String dataHoraParcial){
-//
-//        listaRegistro.forEach(registro -> {
-//
-//            registro.setDataHoraParcial(ManipulaDatas.calculaTempoParcial(registro.getHoraEntrada(), dataHoraParcial));
-//            registro.calculaValorMinuto(registro.getHoraEntrada() , dataHoraParcial);
-//            out.println(registro);
-//
-//        });
-//    }
-
 
     @Override
     public String toString() {
@@ -96,17 +93,10 @@ public class Repositorio {
         listaClientes.add(cliente);
     }
 
-    public void  adicionarRegistro(Registro registro) {
-        listaRegistro.add(registro);
-    }
     public Optional<LocalDateTime> retornarHoraEntrada(String placa) {
         return listaRegistro.stream()
                 .filter(buscaRegistro -> buscaRegistro.getVeiculo().getPlaca().equalsIgnoreCase(placa) && buscaRegistro.getTipoRegistro().equals(TipoRegistro.ENTRADA))
                 .map(Registro::getDataRegistro).findFirst();
-    }
-
-    public void retornarDados(){
-        out.println(listaRegistro);
     }
 
     public void retornarDados(String placa){

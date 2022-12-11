@@ -1,8 +1,6 @@
 import BancoDeDados.Repositorio;
 import exceptions.NaoExisteRegistroException;
 import tela.TelaSistema;
-
-import java.lang.annotation.RetentionPolicy;
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -30,7 +28,7 @@ public class Main {
                     break;
                 case 3:
                     Repositorio.getInstance().listaRegistrosComDataHoraSaidaParcial("12-12-2022-16-25");
-                    //ajustar retorno da lista para excluir casos que já tiveram saída e verificar cálculo de duração
+                    //TODO confirmar cálculo de duração
                     break;
                 case 4:
                     sair = 4;
@@ -41,11 +39,6 @@ public class Main {
         }
 
         out.println("Fim do Programa");
-
-        //temp
-        Repositorio.getInstance().retornarDados();
-
-
     }
 
 }

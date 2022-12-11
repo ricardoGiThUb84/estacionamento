@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 
 public class ManipulaDatas {
-    private ManipulaDatas(){};
+    private ManipulaDatas(){}
 
     static public LocalDateTime formatarStringDataEntradaUsuario(String dataHora){
 

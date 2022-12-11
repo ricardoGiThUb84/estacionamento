@@ -3,11 +3,7 @@ package entidade;
 import BancoDeDados.Repositorio;
 import Utilitarios.CalculoValores;
 import Utilitarios.ManipulaDatas;
-import exceptions.NaoExisteRegistroException;
-
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Objects;
 
 public class Registro implements CalculoValores {
     private Veiculo veiculo;
@@ -52,19 +48,6 @@ public class Registro implements CalculoValores {
         double minutos =  ManipulaDatas.calculaDiferencaTempoMinutos(dataHoraInicio, dataHoraFim);
         this.valor = (5 * minutos) / 60;
     }
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Registro registro = (Registro) o;
-//        return Objects.equals(id, registro.id) ;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id);
-//    }
 
     @Override
     public String toString() {

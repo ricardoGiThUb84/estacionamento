@@ -16,7 +16,7 @@ public class TelaSistema {
     private static final Repositorio repositorio = Repositorio.getInstance();
     private TelaSistema() {
     }
-    public static void entrada(Scanner scan) throws NaoExisteRegistroException {
+    public static void entrada(Scanner scan) {
 
         out.println("Digite a placa do veículo:");
         String placa = scan.next();

@@ -5,15 +5,13 @@ import entidade.Cliente;
 import entidade.Registro;
 import entidade.TipoRegistro;
 import entidade.Veiculo;
-
 import java.util.Scanner;
-
 import static java.lang.System.out;
 
 public class TelaCadastro {
 
     private static final Repositorio repositorio = Repositorio.getInstance();
-    private TelaCadastro(){};
+    private TelaCadastro(){}
 
     public static Veiculo cadastrarVeiculo(Scanner scan, String placa){
 
