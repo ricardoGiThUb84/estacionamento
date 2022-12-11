@@ -3,9 +3,9 @@ package tela;
 import BancoDeDados.Repositorio;
 import entidade.Cliente;
 import entidade.Registro;
+import entidade.TipoRegistro;
 import entidade.Veiculo;
 import exceptions.NaoExisteRegistroException;
-import tela.TelaCadastro;
 
 import java.util.Scanner;
 
@@ -18,46 +18,46 @@ public class TelaSistema {
     }
     public static void entrada(Scanner scan) throws NaoExisteRegistroException {
 
-            out.println("Digite a placa do veículo:");
+        out.println("Digite a placa do veículo:");
+        String placa = scan.next();
 
-            String placa = scan.next();
-
-        if(repositorio.verificaSeHaRegistro(placa)){
-
-            out.println("Digite a data e hora entrada no formato: dd-mm-aaaa-hh-mm");
-          Registro reg =  repositorio.buscaRegistroPorId(placa);
-          reg.setHoraEntrada(scan.next());
-          reg.setHoraSaida(null);
-          reg.setDataHoraParcial(null);
-
-        }else{
+        if(repositorio.retornarDadosVeiculo(placa).isPresent()){
+            repositorio.adicionarRegistro(new Registro(repositorio.retornarDadosVeiculo(placa).get(), TipoRegistro.ENTRADA));
+        }
+        else{
             Veiculo veiculo;
             Cliente cliente;
-
             out.println("Deseja cadastrar veículo com o cliente? | Sim: (S) ou Não: (N)");
-
             switch (scan.next().toUpperCase()){
                 case "S" :
-                   veiculo = TelaCadastro.cadastraVeiculo(scan);
-                   cliente = TelaCadastro.cadastraCliente(scan);
-                   veiculo.setCondutor(cliente);
-
-                    out.println("Digite a data e hora entrada no formato: dd-mm-aaaa-hh-mm");
-                    repositorio.adiciona(TelaCadastro.cadasTrarRegistro(veiculo, scan.next()));
+                    veiculo = TelaCadastro.cadastrarVeiculo(scan, placa);
+                    cliente = TelaCadastro.cadastraCliente(scan);
+                    veiculo.setCondutor(cliente);
+                    repositorio.adicionarRegistro(TelaCadastro.cadastrarRegistro(veiculo, TipoRegistro.ENTRADA));
                     break;
 
                 case "N":
-                   veiculo = TelaCadastro.cadastraVeiculo(scan);
-                    out.println("Digite a data e hora entrada no formato: dd-mm-aaaa-hh-mm");
-                   repositorio.adiciona(TelaCadastro.cadasTrarRegistro(veiculo , scan.next()));
-                   break;
+                    veiculo = TelaCadastro.cadastrarVeiculo(scan, placa);
+                    repositorio.adicionarRegistro(TelaCadastro.cadastrarRegistro(veiculo, TipoRegistro.ENTRADA));
+                    break;
 
                 default:
                     out.println("Opção inválida!");
             }
         }
+    }
 
+    public static void saida(Scanner scan) throws NaoExisteRegistroException {
 
+        out.println("Digite a placa do veículo:");
+        String placa = scan.next();
 
+        if (repositorio.buscaRegistroEntrada(placa).isPresent()) {
+            out.println("Digite a data e hora de saída no formato: dd-mm-aaaa-hh-mm");
+            repositorio.adicionarRegistro(new Registro(repositorio.retornarDadosVeiculo(placa).get(), TipoRegistro.SAIDA, scan.next()));
+            repositorio.retornarDados(placa);
+        } else {
+            throw new NaoExisteRegistroException("Não há veículo com a placa informada.");
+        }
     }
 }
