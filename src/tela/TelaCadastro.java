@@ -1,54 +1,43 @@
 package tela;
 
+import BancoDeDados.Repositorio;
 import entidade.Cliente;
 import entidade.Registro;
+import entidade.TipoRegistro;
 import entidade.Veiculo;
-
 import java.util.Scanner;
-
 import static java.lang.System.out;
 
 public class TelaCadastro {
 
-    private TelaCadastro(){};
-    public static Veiculo cadastraVeiculo(Scanner scan){
+    private static final Repositorio repositorio = Repositorio.getInstance();
+    private TelaCadastro(){}
 
-        String modelo;
-        String placa;
+    public static Veiculo cadastrarVeiculo(Scanner scan, String placa){
 
-        out.println("Cadastre o veículo");
-        out.println("------------------");
-
-        out.println("Digite o modelo:");
-
-        modelo = scan.next();
-
-        out.println("Digite a placa:");
-
-        placa = scan.next();
-
-        return new Veiculo(modelo, placa);
+        out.println("Digite o modelo do veículo:");
+        Veiculo veiculo = new Veiculo(scan.next(), placa);
+        repositorio.adicionarVeiculo(veiculo);
+        return veiculo;
     }
-    public static Cliente cadastraCliente(Scanner scan){
-        String nome;
-        String cnh;
 
+    public static Cliente cadastraCliente(Scanner scan){
         out.println("Cadastre o cliente");
         out.println("------------------");
 
-        out.println("Digite 0 nome:");
-
-        nome = scan.next();
+        out.println("Digite o nome:");
+        String nome = scan.next();
 
         out.println("Digite a cnh:");
+        String cnh = scan.next();
 
-        cnh = scan.next();
-
-        return new Cliente(nome, cnh);
+        Cliente cliente = new Cliente(nome, cnh);
+        repositorio.adicionarCliente(cliente);
+        return cliente;
     }
 
-    public static Registro cadasTrarRegistro(Veiculo veiculo, String dataEntrada){
-        return new Registro(veiculo , dataEntrada);
+    public static Registro cadastrarRegistro(Veiculo veiculo, TipoRegistro tipoRegistro){
+        return new Registro(veiculo, tipoRegistro);
     }
 
 }

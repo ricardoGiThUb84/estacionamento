@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 
 public class ManipulaDatas {
-    private ManipulaDatas(){};
+    private ManipulaDatas(){}
 
     static public LocalDateTime formatarStringDataEntradaUsuario(String dataHora){
 
@@ -14,10 +14,7 @@ public class ManipulaDatas {
         return LocalDateTime.of(data[2], data[1], data[0], data[3], data[4]);
     }
 
-    static public long calculaDiferencaTempoDias(String entrada, String saida){
-
-        LocalDateTime horaDataEntrada = formatarStringDataEntradaUsuario(entrada);
-        LocalDateTime horaDataSaida = formatarStringDataEntradaUsuario(saida);
+    static public long calculaDiferencaTempoDias(LocalDateTime horaDataEntrada, LocalDateTime horaDataSaida){
 
         long diaria = horaDataEntrada.until(horaDataSaida, ChronoUnit.DAYS);
 
@@ -25,12 +22,9 @@ public class ManipulaDatas {
         return 0;
     }
 
-    static public long calculaDiferencaTempoMinutos(String entrada, String saida){
+    static public long calculaDiferencaTempoMinutos(LocalDateTime horaDataEntrada, LocalDateTime horaDataSaida){
 
-        LocalDateTime horaDataEntrada = formatarStringDataEntradaUsuario(entrada);
-        LocalDateTime horaDataSaida = formatarStringDataEntradaUsuario(saida);
-
-        long dias = calculaDiferencaTempoDias(entrada,saida);
+        long dias = calculaDiferencaTempoDias(horaDataEntrada,horaDataSaida);
         long calculoMinutos = horaDataEntrada.until(horaDataSaida, ChronoUnit.MINUTES);
 
         return (dias >= 1 ) ? calculoMinutos - transformaDiasParaMinutos(dias) : calculoMinutos;
@@ -44,7 +38,7 @@ public class ManipulaDatas {
 
     }
 
-    public static String calculaTempoParcial(String dataHoraEntrada, String dataHoraMomentanea){
+    public static String calculaTempoParcial(LocalDateTime dataHoraEntrada, LocalDateTime dataHoraMomentanea){
 
         long dias = calculaDiferencaTempoDias(dataHoraEntrada , dataHoraMomentanea);
         long minutos = calculaDiferencaTempoMinutos(dataHoraEntrada, dataHoraMomentanea);

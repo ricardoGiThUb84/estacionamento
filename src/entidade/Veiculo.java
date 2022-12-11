@@ -4,7 +4,6 @@ public class Veiculo {
 
     private final String modelo;
     private final String placa;
-
     private Cliente condutor;
 
     public Veiculo(String modelo, String placa) {
