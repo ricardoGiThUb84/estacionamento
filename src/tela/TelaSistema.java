@@ -58,4 +58,9 @@ public class TelaSistema {
             throw new NaoExisteRegistroException("Não há veículo com a placa informada.");
         }
     }
+
+    public static void gerarRelatorio(Scanner scan){
+        out.println("Informe a data do relatório no formato: dd-mm-aaaa-hh-mm");
+        repositorio.listaRegistrosComDataHoraSaidaParcial(scan.next());
+    }
 }
