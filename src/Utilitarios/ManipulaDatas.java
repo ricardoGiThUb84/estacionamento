@@ -39,10 +39,15 @@ public class ManipulaDatas {
     }
 
     public static String calculaTempoParcial(LocalDateTime dataHoraEntrada, LocalDateTime dataHoraMomentanea){
-
+        int conversaoMinutoHora = 60;
         long dias = calculaDiferencaTempoDias(dataHoraEntrada , dataHoraMomentanea);
         long minutos = calculaDiferencaTempoMinutos(dataHoraEntrada, dataHoraMomentanea);
-        return dias > 0 ? dias + " dia(s) " + "minuto(s) " + minutos : "minuto(s) " + minutos;
+        int horas = 0;
+        if (minutos >= conversaoMinutoHora){
+            horas = (int)minutos/conversaoMinutoHora;
+            minutos = minutos - horas * conversaoMinutoHora;
+        }
+        return (dias > 0 ? dias + " dia(s) " : "") + (horas > 0 ? horas + " horas(s) " : "") + minutos + " minuto(s).";
     }
 
 

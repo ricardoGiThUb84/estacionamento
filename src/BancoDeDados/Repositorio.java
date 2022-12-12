@@ -7,6 +7,7 @@ import entidade.TipoRegistro;
 import entidade.Veiculo;
 import exceptions.NaoExisteRegistroException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import static java.lang.System.*;
 
@@ -65,14 +66,16 @@ public class Repositorio {
             }
         });
 
+        out.printf("%n***** Relatório de veículos estacionados em %s *****%n%n", dataHoraMomentanea.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
         entradas.forEach(entrada -> {
             Optional<Registro> registro = saidas.stream().filter(saida -> saida.getVeiculo().getPlaca().equals(entrada.getVeiculo().getPlaca())).findFirst();
             if(registro.isEmpty()){
                 String duracao = ManipulaDatas.calculaTempoParcial(entrada.getDataRegistro(), dataHoraMomentanea);
                 //var valorParcial = registro.calculaValorMinuto(registro.getVeiculo(), dataHoraMomentanea);
-                out.println(entrada + " duração = " + duracao);
+                out.println(entrada.imprimirSnapshot(duracao));
             }
         });
+        out.println();
     }
 
     @Override
