@@ -6,9 +6,7 @@ import entidade.Registro;
 import entidade.TipoRegistro;
 import entidade.Veiculo;
 import exceptions.NaoExisteRegistroException;
-
 import java.util.Scanner;
-
 import static java.lang.System.out;
 
 public class TelaSistema {

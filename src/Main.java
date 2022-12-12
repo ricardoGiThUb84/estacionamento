@@ -27,8 +27,7 @@ public class Main {
                     TelaSistema.saida(scan);
                     break;
                 case 3:
-                    Repositorio.getInstance().listaRegistrosComDataHoraSaidaParcial("12-12-2022-16-25");
-                    //TODO confirmar cálculo de duração
+                    Repositorio.getInstance().listaRegistrosComDataHoraSaidaParcial("13-12-2022-18-00");
                     break;
                 case 4:
                     sair = 4;

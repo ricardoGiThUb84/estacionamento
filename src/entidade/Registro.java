@@ -4,6 +4,7 @@ import BancoDeDados.Repositorio;
 import Utilitarios.CalculoValores;
 import Utilitarios.ManipulaDatas;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Registro implements CalculoValores {
     private Veiculo veiculo;
@@ -60,5 +61,9 @@ public class Registro implements CalculoValores {
                 '}';
     }
 
+    public String imprimirSnapshot(String duracao){
+        return String.format("Veículo - Placa: %s - Modelo: %s - Data de Entrada: %s - Duração Atual: %s",
+                veiculo.getPlaca(), veiculo.getModelo(), dataRegistro.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")), duracao);
+    }
 
 }
