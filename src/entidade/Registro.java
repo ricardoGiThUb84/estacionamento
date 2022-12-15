@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Registro implements CalculoValores {
+
+    //TODO aplicar herança - criar dois filhos (entrada e saída)
     private Veiculo veiculo;
     private double valor;
     private LocalDateTime dataRegistro;
@@ -41,7 +43,7 @@ public class Registro implements CalculoValores {
     public TipoRegistro getTipoRegistro() {
         return tipoRegistro;
     }
-
+    //TODO revisar o cálculo de horas (1hora = R$ 5 e desconto do plano)
     @Override
     public void calculaValorMinuto(Veiculo veiculo, LocalDateTime dataHoraFim) {
 
