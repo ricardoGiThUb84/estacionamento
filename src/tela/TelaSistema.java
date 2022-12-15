@@ -20,6 +20,8 @@ public class TelaSistema {
         String placa = scan.next();
 
         if(repositorio.retornarDadosVeiculo(placa).isPresent()){
+            //TODO verificar se tem cliente cadastrado (se não, perguntar se deseja cadastrar)
+
             repositorio.adicionarRegistro(new Registro(repositorio.retornarDadosVeiculo(placa).get(), TipoRegistro.ENTRADA));
         }
         else{

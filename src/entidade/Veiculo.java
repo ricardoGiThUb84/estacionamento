@@ -6,6 +6,8 @@ public class Veiculo {
     private final String placa;
     private Cliente condutor;
 
+    //TODO vincular plano (estilo Connect car) - Talvez usar um Enum
+
     public Veiculo(String modelo, String placa) {
         this.modelo = modelo;
         this.placa = placa;
