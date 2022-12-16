@@ -1,20 +1,19 @@
 package tela;
 
 import BancoDeDados.Repositorio;
-import entidade.Cliente;
-import entidade.Registro;
-import entidade.TipoRegistro;
-import entidade.Veiculo;
+import Utilitarios.ManipulaDatas;
+import entidade.*;
 import exceptions.NaoExisteRegistroException;
+
+import java.time.LocalDateTime;
 import java.util.Scanner;
+
 import static java.lang.System.out;
 
 public class TelaSistema {
-
     private static final Repositorio repositorio = Repositorio.getInstance();
-    private TelaSistema() {
-    }
-    public static void entrada(Scanner scan) {
+
+    public static void cadastrarEntrada(Scanner scan) {
 
         out.println("Digite a placa do veículo:");
         String placa = scan.next();
@@ -22,7 +21,7 @@ public class TelaSistema {
         if(repositorio.retornarDadosVeiculo(placa).isPresent()){
             //TODO verificar se tem cliente cadastrado (se não, perguntar se deseja cadastrar)
 
-            repositorio.adicionarRegistro(new Registro(repositorio.retornarDadosVeiculo(placa).get(), TipoRegistro.ENTRADA));
+            repositorio.adicionarRegistro(new RegistroEntrada(repositorio.retornarDadosVeiculo(placa).get()));
         }
         else{
             Veiculo veiculo;
@@ -30,15 +29,15 @@ public class TelaSistema {
             out.println("Deseja cadastrar veículo com o cliente? | Sim: (S) ou Não: (N)");
             switch (scan.next().toUpperCase()){
                 case "S" :
-                    veiculo = TelaCadastro.cadastrarVeiculo(scan, placa);
-                    cliente = TelaCadastro.cadastraCliente(scan);
+                    veiculo = TelaCadastroVeiculo.cadastrarVeiculo(scan, placa);
+                    cliente = TelaCadastroCliente.cadastrarCliente(scan);
                     veiculo.setCondutor(cliente);
-                    repositorio.adicionarRegistro(TelaCadastro.cadastrarRegistro(veiculo, TipoRegistro.ENTRADA));
+                    repositorio.adicionarRegistro(new RegistroEntrada(veiculo));
                     break;
 
                 case "N":
-                    veiculo = TelaCadastro.cadastrarVeiculo(scan, placa);
-                    repositorio.adicionarRegistro(TelaCadastro.cadastrarRegistro(veiculo, TipoRegistro.ENTRADA));
+                    veiculo = TelaCadastroVeiculo.cadastrarVeiculo(scan, placa);
+                    repositorio.adicionarRegistro(new RegistroEntrada(veiculo));
                     break;
 
                 default:
@@ -47,22 +46,19 @@ public class TelaSistema {
         }
     }
 
-    public static void saida(Scanner scan) throws NaoExisteRegistroException {
+    public static void cadastrarSaida(Scanner scan) throws NaoExisteRegistroException {
 
         out.println("Digite a placa do veículo:");
         String placa = scan.next();
 
         if (repositorio.buscaRegistroEntrada(placa).isPresent()) {
             out.println("Digite a data e hora de saída no formato: dd-mm-aaaa-hh-mm");
-            repositorio.adicionarRegistro(new Registro(repositorio.retornarDadosVeiculo(placa).get(), TipoRegistro.SAIDA, scan.next()));
+            LocalDateTime dataRegistro = ManipulaDatas.formatarStringDataEntradaUsuario(scan.next());
+            repositorio.adicionarRegistro(new RegistroSaida(repositorio.retornarDadosVeiculo(placa).get(), dataRegistro));
             repositorio.retornarDados(placa);
         } else {
             throw new NaoExisteRegistroException("Não há veículo com a placa informada.");
         }
     }
 
-    public static void gerarRelatorio(Scanner scan){
-        out.println("Informe a data do relatório no formato: dd-mm-aaaa-hh-mm");
-        repositorio.listaRegistrosComDataHoraSaidaParcial(scan.next());
-    }
 }

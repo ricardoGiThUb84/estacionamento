@@ -13,12 +13,11 @@ import static java.lang.System.*;
 
 public class Repositorio {
     private static Repositorio instance;
-
+    //TODO revisar métodos
     private final ArrayList<Registro> listaRegistro = new ArrayList<>();
     private final ArrayList<Cliente> listaClientes= new ArrayList<>();
     private final ArrayList<Veiculo> listaVeiculos= new ArrayList<>();
 
-    
     private Repositorio() {}
 
     public static Repositorio getInstance() {

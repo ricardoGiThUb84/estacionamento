@@ -47,7 +47,7 @@ public class ManipulaDatas {
             horas = (int)minutos/conversaoMinutoHora;
             minutos = minutos - horas * conversaoMinutoHora;
         }
-        return (dias > 0 ? dias + " dia(s) " : "") + (horas > 0 ? horas + " horas(s) " : "") + minutos + " minuto(s).";
+        return (dias > 0 ? dias + " dia(s) " : "") + (horas > 0 ? horas + " hora(s) " : "") + minutos + " minuto(s).";
     }
 
 

@@ -1,6 +1,6 @@
-import BancoDeDados.Repositorio;
 import exceptions.NaoExisteRegistroException;
 import tela.TelaSistema;
+import tela.TelaRelatorio;
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -21,13 +21,13 @@ public class Main {
 
             switch(scan.nextInt()){
                 case 1:
-                    TelaSistema.entrada(scan);
+                    TelaSistema.cadastrarEntrada(scan);
                     break;
                 case 2:
-                    TelaSistema.saida(scan);
+                    TelaSistema.cadastrarSaida(scan);
                     break;
                 case 3:
-                    TelaSistema.gerarRelatorio(scan);
+                    TelaRelatorio.gerarRelatorio(scan);
                     break;
                 case 4:
                     sair = 4;
