@@ -16,17 +16,17 @@ public class Main {
 
         int sair = -1;
 
-        while(sair != 4){
+        while(sair != 5){
             out.println("==============================");
             out.println("Bem vindo ao estacione seguro:");
             out.println("==============================");
 
-            out.println("Digite: 1 - Entrada Veículo | 2 - Saída Veículo | 3 - Snapshot | 4 - Sair");
+            out.println("Digite: 1 - Entrada Veículo | 2 - Saída Veículo | 3 - Snapshot | 4 - Compra de Plano | 5 - Sair");
 
             String opcao = scan.next();
-            if(opcao.equals("4")){
+            if(opcao.equals("5")){
                 out.println("Até logo.");
-                sair = 4;
+                sair = 5;
                 break;
             }
             else{ FabricaTela.getTela(scan, opcao); }

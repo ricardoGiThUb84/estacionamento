@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 public class RegistroSaida extends Registro {
 
+    private static final Repositorio repositorio = Repositorio.getInstance();
     private double valor;
 
     public RegistroSaida(Veiculo veiculo, LocalDateTime dataRegistro) {
@@ -19,10 +20,22 @@ public class RegistroSaida extends Registro {
     }
 
     public void calculaValorMinuto(Veiculo veiculo, LocalDateTime dataHoraFim) {
-        // TODO revisar o cálculo de horas (1hora = R$ 5 e desconto do plano)
-        LocalDateTime dataHoraInicio = Repositorio.getInstance().retornarHoraEntrada(veiculo.getPlaca()).orElseThrow(() -> new RuntimeException("Não há registro de entrada para este veiculo!"));
-        double minutos =  ManipulaDatas.calculaDiferencaTempoMinutos(dataHoraInicio, dataHoraFim);
-        this.valor = (5 * minutos) / 60;
+
+        Registro dadosEntrada = repositorio.buscarUltimoRegistroEntrada(veiculo.getPlaca()).orElseThrow(() -> new RuntimeException("Não há registro de entrada para este veiculo!"));
+        LocalDateTime dataHoraInicio = dadosEntrada.getDataRegistro();
+        double hora =  ManipulaDatas.calculaDiferencaTempoHoras(dataHoraInicio, dataHoraFim);
+        int horasPlano = veiculo.getSaldoHoras();
+
+        if(horasPlano == 0){
+            this.valor = (5 * hora);
+        } else if (horasPlano >= hora){
+            repositorio.atualizarVeiculo(veiculo, veiculo.getTipoPlano(), (int) -hora);
+            this.valor = 0;
+        } else if (horasPlano < hora){
+            int saldoHoras = (int)hora - horasPlano;
+            repositorio.atualizarVeiculo(veiculo, veiculo.getTipoPlano(), -horasPlano);
+            this.valor = (5 * saldoHoras);
+        }
     }
 
     @Override
