@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 import static java.lang.System.out;
 
-public class TelaSistema {
+public class TelaSistema extends Tela{
     private static final Repositorio repositorio = Repositorio.getInstance();
 
     public static void cadastrarEntrada(Scanner scan) {

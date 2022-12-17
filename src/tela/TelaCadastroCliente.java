@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import static java.lang.System.out;
 
-public class TelaCadastroCliente {
+public class TelaCadastroCliente extends Tela{
 
     private static final Repositorio repositorio = Repositorio.getInstance();
 

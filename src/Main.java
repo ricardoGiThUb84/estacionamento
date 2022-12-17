@@ -1,6 +1,6 @@
 import exceptions.NaoExisteRegistroException;
-import tela.TelaSistema;
-import tela.TelaRelatorio;
+import tela.FabricaTela;
+
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -19,22 +19,13 @@ public class Main {
 
             out.println("Digite: 1 - Entrada Veículo | 2 - Saída Veículo | 3 - Snapshot | 4 - Sair");
 
-            switch(scan.nextInt()){
-                case 1:
-                    TelaSistema.cadastrarEntrada(scan);
-                    break;
-                case 2:
-                    TelaSistema.cadastrarSaida(scan);
-                    break;
-                case 3:
-                    TelaRelatorio.gerarRelatorio(scan);
-                    break;
-                case 4:
-                    sair = 4;
-                    break;
-                default:
-                    out.println("Entrada inválida");
+            int opcao = scan.nextInt();
+            if(opcao == 4){
+                out.println("Até logo.");
+                sair = 4;
+                break;
             }
+            else{ FabricaTela.getTela(scan, opcao); }
         }
 
         out.println("Fim do Programa");

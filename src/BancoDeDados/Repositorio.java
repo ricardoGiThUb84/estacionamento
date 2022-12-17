@@ -65,7 +65,7 @@ public class Repositorio {
             }
         });
 
-        out.printf("%n***** Relatório de veículos estacionados em %s *****%n%n", dataHoraMomentanea.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+        out.printf("%n***** Relatório de veículos estacionados até %s *****%n%n", dataHoraMomentanea.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
         entradas.forEach(entrada -> {
             Optional<Registro> registro = saidas.stream().filter(saida -> saida.getVeiculo().getPlaca().equals(entrada.getVeiculo().getPlaca())).findFirst();
             if(registro.isEmpty()){
