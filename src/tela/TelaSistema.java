@@ -2,8 +2,10 @@ package tela;
 
 import BancoDeDados.Repositorio;
 import Utilitarios.ManipulaDatas;
-import entidade.*;
-import exceptions.NaoExisteRegistroException;
+import entidade.Cliente;
+import entidade.RegistroEntrada;
+import entidade.RegistroSaida;
+import entidade.Veiculo;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -46,7 +48,7 @@ public class TelaSistema extends Tela{
         }
     }
 
-    public static void cadastrarSaida(Scanner scan) throws NaoExisteRegistroException {
+    public static void cadastrarSaida(Scanner scan) {
 
         out.println("Digite a placa do veículo:");
         String placa = scan.next();
@@ -57,7 +59,7 @@ public class TelaSistema extends Tela{
             repositorio.adicionarRegistro(new RegistroSaida(repositorio.retornarDadosVeiculo(placa).get(), dataRegistro));
             repositorio.retornarDados(placa);
         } else {
-            throw new NaoExisteRegistroException("Não há veículo com a placa informada.");
+            out.println("Não há veículo com a placa informada.");
         }
     }
 
