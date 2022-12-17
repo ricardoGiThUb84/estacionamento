@@ -51,7 +51,7 @@ public class Repositorio {
     }
 
     public void listaRegistrosComDataHoraSaidaParcial(String dataHoraParcial){
-
+        // TODO Revisar cálculo (retornar a entrada mais recente)
         LocalDateTime dataHoraMomentanea = ManipulaDatas.formatarStringDataEntradaUsuario(dataHoraParcial);
 
         ArrayList<Registro> entradas = new ArrayList<>();

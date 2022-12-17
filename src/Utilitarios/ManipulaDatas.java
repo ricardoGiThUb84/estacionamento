@@ -19,7 +19,7 @@ public class ManipulaDatas {
 
         long calculoMinutos = horaDataEntrada.until(horaDataSaida, ChronoUnit.MINUTES);
 
-        return Math.ceilDiv(calculoMinutos , 60);
+        return (long)Math.ceil(calculoMinutos/60.0);
     }
     public static String calculaTempoParcial(LocalDateTime dataHoraEntrada, LocalDateTime dataHoraMomentanea){
 
