@@ -57,7 +57,7 @@ public class TelaSistema extends Tela{
             out.println("Digite a data e hora de saída no formato: dd-mm-aaaa-hh-mm");
             LocalDateTime dataRegistro = ManipulaDatas.formatarStringDataEntradaUsuario(scan.next());
             repositorio.adicionarRegistro(new RegistroSaida(repositorio.retornarDadosVeiculo(placa).get(), dataRegistro));
-            repositorio.retornarDados(placa);
+
         } else {
             out.println("Não há veículo com a placa informada.");
         }

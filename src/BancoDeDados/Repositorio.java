@@ -85,8 +85,4 @@ public class Repositorio {
     public void  adicionarCliente(Cliente cliente) {
         listaClientes.add(cliente);
     }
-
-    public void retornarDados(String placa){
-        out.println(listaRegistro.stream().filter(buscaRegistro -> buscaRegistro.getVeiculo().getPlaca().equalsIgnoreCase(placa) && buscaRegistro.getTipoRegistro().equals(TipoRegistro.SAIDA)).findFirst());
-    }
 }
