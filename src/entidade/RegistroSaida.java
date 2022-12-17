@@ -21,8 +21,8 @@ public class RegistroSaida extends Registro {
     public void calculaValorMinuto(Veiculo veiculo, LocalDateTime dataHoraFim) {
         // TODO revisar o cálculo de horas (1hora = R$ 5 e desconto do plano)
         LocalDateTime dataHoraInicio = Repositorio.getInstance().retornarHoraEntrada(veiculo.getPlaca()).orElseThrow(() -> new RuntimeException("Não há registro de entrada para este veiculo!"));
-        double minutos =  ManipulaDatas.calculaDiferencaTempoMinutos(dataHoraInicio, dataHoraFim);
-        this.valor = (5 * minutos) / 60;
+        double hora =  ManipulaDatas.calculaDiferencaTempoHoras(dataHoraInicio, dataHoraFim);
+        this.valor = (5 * hora);
     }
 
     @Override
