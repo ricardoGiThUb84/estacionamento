@@ -51,7 +51,7 @@ public class TelaSistema extends Tela{
         out.println("Digite a placa do veículo:");
         String placa = scan.next();
 
-        if (repositorio.buscaRegistroEntrada(placa).isPresent()) {
+        if (repositorio.buscarUltimoRegistroEntrada(placa).isPresent()) {
             out.println("Digite a data e hora de saída no formato: dd-mm-aaaa-hh-mm");
             LocalDateTime dataRegistro = ManipulaDatas.formatarStringDataEntradaUsuario(scan.next());
             repositorio.adicionarRegistro(new RegistroSaida(repositorio.retornarDadosVeiculo(placa).get(), dataRegistro));

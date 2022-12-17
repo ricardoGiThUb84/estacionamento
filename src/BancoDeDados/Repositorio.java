@@ -2,12 +2,12 @@ package BancoDeDados;
 
 import Utilitarios.ManipulaDatas;
 import entidade.*;
-import exceptions.NaoExisteRegistroException;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
+
 import static java.lang.System.*;
 
 public class Repositorio {
@@ -28,51 +28,34 @@ public class Repositorio {
         listaRegistro.add(registro);
     }
 
-    public Registro buscaRegistroPorId(String placa) throws NaoExisteRegistroException {
+    public List<Registro> buscarRegistrosPorVeiculo(String placa){
+        return listaRegistro.stream()
+                .filter(buscaRegistro -> buscaRegistro.getVeiculo().getPlaca().equalsIgnoreCase(placa))
+                .collect(Collectors.toList());
+    }
 
-        if(verificaSeHaRegistro(placa)){
-            return listaRegistro.stream()
-                    .filter(buscaRegistro -> buscaRegistro.getVeiculo().getPlaca()
-                            .equalsIgnoreCase(placa)).findFirst().orElseThrow(() -> new NaoExisteRegistroException("Não há registro!"));
+    public Optional<Registro> buscarUltimoRegistroEntrada(String placa) {
+        List<Registro> registros = buscarRegistrosPorVeiculo(placa);
+        if(registros.size() % 2 == 0){
+            return null;
+        }else{
+            return registros.stream()
+                    .skip(registros.size() - 1)
+                    .reduce((first, second) -> second);
         }
-        throw new NaoExisteRegistroException("Não há registro!");
     }
 
-    public Optional<Registro> buscaRegistroEntrada(String placa) {
-        return listaRegistro.stream()
-                .filter(buscaRegistro -> buscaRegistro.getVeiculo().getPlaca().equalsIgnoreCase(placa)
-                        && buscaRegistro.getTipoRegistro().equals(TipoRegistro.ENTRADA)).findFirst();
-    }
+    public void listarVeiculosEstacionados(){
 
-    public boolean verificaSeHaRegistro(String placa) {
-        return listaRegistro.stream()
-                .anyMatch(registro -> registro.getVeiculo().getPlaca().equalsIgnoreCase(placa));
-    }
+        out.printf("%n***** Relatório de veículos estacionados em %s *****%n%n", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
 
-    public void listaRegistrosComDataHoraSaidaParcial(String dataHoraParcial){
-        // TODO Revisar cálculo (retornar a entrada mais recente)
-        LocalDateTime dataHoraMomentanea = ManipulaDatas.formatarStringDataEntradaUsuario(dataHoraParcial);
-
-        ArrayList<Registro> entradas = new ArrayList<>();
-        ArrayList<Registro> saidas = new ArrayList<>();
-
-        listaRegistro.forEach(registro -> {
-            if(registro.getTipoRegistro().equals(TipoRegistro.ENTRADA)){
-                entradas.add(registro);
-            }else{
-                saidas.add(registro);
+        for(Veiculo veiculo : listaVeiculos){
+            Optional<Registro> ultimaEntrada = buscarUltimoRegistroEntrada(veiculo.getPlaca());
+            if(ultimaEntrada != null && ultimaEntrada.get().getTipoRegistro().equals(TipoRegistro.ENTRADA)){
+                String duracao = ManipulaDatas.calculaTempoParcial(ultimaEntrada.get().getDataRegistro(), LocalDateTime.now());
+                out.println(ultimaEntrada.get().imprimirSnapshot(duracao));
             }
-        });
-
-        out.printf("%n***** Relatório de veículos estacionados até %s *****%n%n", dataHoraMomentanea.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
-        entradas.forEach(entrada -> {
-            Optional<Registro> registro = saidas.stream().filter(saida -> saida.getVeiculo().getPlaca().equals(entrada.getVeiculo().getPlaca())).findFirst();
-            if(registro.isEmpty()){
-                String duracao = ManipulaDatas.calculaTempoParcial(entrada.getDataRegistro(), dataHoraMomentanea);
-                //var valorParcial = registro.calculaValorMinuto(registro.getVeiculo(), dataHoraMomentanea);
-                out.println(entrada.imprimirSnapshot(duracao));
-            }
-        });
+        }
         out.println();
     }
 
@@ -101,12 +84,6 @@ public class Repositorio {
 
     public void  adicionarCliente(Cliente cliente) {
         listaClientes.add(cliente);
-    }
-
-    public Optional<LocalDateTime> retornarHoraEntrada(String placa) {
-        return listaRegistro.stream()
-                .filter(buscaRegistro -> buscaRegistro.getVeiculo().getPlaca().equalsIgnoreCase(placa) && buscaRegistro.getTipoRegistro().equals(TipoRegistro.ENTRADA))
-                .map(Registro::getDataRegistro).findFirst();
     }
 
     public void retornarDados(String placa){

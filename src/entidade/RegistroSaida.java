@@ -21,7 +21,8 @@ public class RegistroSaida extends Registro {
 
     public void calculaValorMinuto(Veiculo veiculo, LocalDateTime dataHoraFim) {
 
-        LocalDateTime dataHoraInicio = Repositorio.getInstance().retornarHoraEntrada(veiculo.getPlaca()).orElseThrow(() -> new RuntimeException("Não há registro de entrada para este veiculo!"));
+        Registro dadosEntrada = repositorio.buscarUltimoRegistroEntrada(veiculo.getPlaca()).orElseThrow(() -> new RuntimeException("Não há registro de entrada para este veiculo!"));
+        LocalDateTime dataHoraInicio = dadosEntrada.getDataRegistro();
         double hora =  ManipulaDatas.calculaDiferencaTempoHoras(dataHoraInicio, dataHoraFim);
         int horasPlano = veiculo.getSaldoHoras();
 
