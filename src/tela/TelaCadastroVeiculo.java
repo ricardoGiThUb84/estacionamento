@@ -5,7 +5,7 @@ import entidade.Veiculo;
 import java.util.Scanner;
 import static java.lang.System.out;
 
-public class TelaCadastroVeiculo {
+public class TelaCadastroVeiculo extends Tela{
 
     private static final Repositorio repositorio = Repositorio.getInstance();
 
