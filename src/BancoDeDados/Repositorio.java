@@ -1,11 +1,10 @@
 package BancoDeDados;
 
 import Utilitarios.ManipulaDatas;
-import entidade.Cliente;
-import entidade.Registro;
-import entidade.TipoRegistro;
-import entidade.Veiculo;
+import entidade.*;
 import exceptions.NaoExisteRegistroException;
+
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -13,7 +12,7 @@ import static java.lang.System.*;
 
 public class Repositorio {
     private static Repositorio instance;
-    //TODO revisar métodos
+
     private final ArrayList<Registro> listaRegistro = new ArrayList<>();
     private final ArrayList<Cliente> listaClientes= new ArrayList<>();
     private final ArrayList<Veiculo> listaVeiculos= new ArrayList<>();
@@ -84,6 +83,15 @@ public class Repositorio {
 
     public void  adicionarVeiculo(Veiculo veiculo) {
         listaVeiculos.add(veiculo);
+    }
+
+    public void atualizarVeiculo(Veiculo veiculo, TipoPlano tipoPlano, int horas){
+        for(Veiculo item : listaVeiculos){
+            if(item.getPlaca().equals(veiculo.getPlaca())){
+                item.setTipoPlano(tipoPlano);
+                item.setSaldoHoras(horas);
+            }
+        }
     }
 
     public Optional<Veiculo> retornarDadosVeiculo(String placa){

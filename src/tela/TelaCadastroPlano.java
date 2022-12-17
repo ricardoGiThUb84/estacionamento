@@ -26,11 +26,7 @@ public class TelaCadastroPlano {
             }
             TipoPlano tipoPlano = TipoPlano.fromOpcao(scan.nextInt());
 
-            veiculo.setTipoPlano(tipoPlano);
-            veiculo.setSaldoHoras(tipoPlano.getHoras());
-
-            out.println(veiculo);
+            repositorio.atualizarVeiculo(veiculo, tipoPlano, tipoPlano.getHoras());
         }
-
     }
 }
