@@ -5,7 +5,7 @@ public class Veiculo {
     private final String modelo;
     private final String placa;
     private Cliente condutor;
-    private TipoPlano tipoPlano; //TODO ultimo plano?
+    private TipoPlano tipoPlano;
     private int saldoHoras;
 
     public Veiculo(String modelo, String placa) {
