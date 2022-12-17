@@ -19,6 +19,9 @@ public class FabricaTela {
             case 3:
                 TelaRelatorio.gerarRelatorio(scan);
                 break;
+            case 4:
+                TelaCadastroPlano.cadastrarPlano(scan);
+                break;
             default:
                 out.println("Entrada inválida");
         }
